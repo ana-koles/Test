@@ -2,18 +2,17 @@ import './App.css';
 import styled from 'styled-components';
 
 
+const login = 'Puffy'
 function App() {
     return (
         <div className="App">
             <Title>Styled-components <span>.attrs</span> method</Title>
 
             <Form>
-                <Field defaultValue='hello' />
+                <Field defaultValue={login}/>
                 <Field/>
-                123
-                1231
-                123
-                <Field/>
+                <Checkbox type={'checkbox'}></Checkbox>
+                <Checkbox2 type={'checkbox'} title='Check me'></Checkbox2>
             </Form>
         </div>
     );
@@ -35,12 +34,10 @@ const Form = styled.form`
   max-width: 500px;
 `;
 
-type Props = {
-  defaultValue: string | null;
-}
 
-const Field = styled.input.attrs((props: Props) => ({
-  defaultValue: props.defaultValue && 'buy'
+//через attrs задаем дефолтные артрибуты
+const Field = styled.input.attrs((props) => ({
+  defaultValue: props.defaultValue
 }))`
   padding: 5px 15px;
   margin: 10px 0;
@@ -48,4 +45,20 @@ const Field = styled.input.attrs((props: Props) => ({
   font-size: 1rem;
 `;
 
+//можно сказать что Checkbox - это стилизованный Input
+const Checkbox = styled.input.attrs((props) => ({
+  /* type: 'checkbox', */
+  type: props.type,
+}))`
 
+`
+
+
+//можно сказать что Checkbox - это стилизованный Input
+const Checkbox2 = styled.input.attrs(({type, title}) => ({ // применяем диструктуризацию к Props, т.е вытищить только то св-во, к-ое нам нужно
+  /* type: 'checkbox', */
+  type: type,
+  tytle: title //title появляется при наведении курсора
+}))`
+
+`
